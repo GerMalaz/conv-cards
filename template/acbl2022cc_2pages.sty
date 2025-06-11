@@ -108,6 +108,46 @@
 \newcommand\letterspace{}
 \newcommand\fitstyle{}
 
+%Style definitions
+\tikzset{
+    block/.style={rectangle, ultra thin},
+    alert/.style={ultra thin},
+    announce/.style={ultra thin},
+    regular/.style={ultra thin},
+    alertRect/.style={draw=red},
+    announceRect/.style={draw=blue},
+    regularRect/.style={draw=black},
+    alertFilled/.style={fill=red},
+    announceFilled/.style={fill=blue},
+    regularFilled/.style={fill=black},
+    alertTextField/.style={text=red},
+    announceTextField/.style={text=blue},
+    regularTextField/.style={text=black},
+    checkBox/.style={draw=#1},
+    filled/.style={fill=#1},
+    textField/.style={text=#1},
+    centered/.style={align=center},
+    big/.style={font=\relsize{2}},
+    bidHeader/.style={font=\bfseries\relsize{2}},
+    relsize/.style={font=\relsize{#1}},
+    bold/.style={font=\bfseries},
+    italics/.style={font=\itshape},
+    boldItalics/.style={font=\bfseries\itshape},
+    italicsRelsize/.style={font=\itshape\relsize{#1}},
+    label/.style={font=\relsize{-1}},
+    italicsLabel/.style={font=\itshape\relsize{-1}},
+    innerSep1c1d/.style={inner sep=0.5cm},
+    t/.style={text depth=.1\baselineskip,
+              text height=.5\baselineskip},
+    header/.style={right, rectangle, rotate=90, white, inner sep=3pt},
+    box/.style={rectangle,draw=black,inner sep=3pt},
+    cbox/.style={rectangle,draw=black,fill=black,inner sep=3pt},
+    rbox/.style={rectangle,draw=red,inner sep=3pt},
+    crbox/.style={rectangle,draw=red,fill=red,inner sep=3pt},
+    bbox/.style={rectangle,draw=blue,inner sep=3pt},
+    cbbox/.style={rectangle,draw=blue,fill=blue,inner sep=3pt},
+}
+
 %Commands to provide filled vs. empty checkboxes
 %according to whether a boolean is set or cleared:
 \newcommand{\checkbox}[1]{\ifthenelse{\boolean{#1}}{\node [cbox]}{\node [box]}}
@@ -115,7 +155,7 @@
 \newcommand{\bcheckbox}[1]{\ifthenelse{\boolean{#1}}{\node [cbbox]}{\node [bbox]}}
 
 %If you want an X or checkmark instead of a filled box, you need to edit the
-%style commands at \begin{tikzpicture} below.
+%style commands at the Style definitions (\tikzset) above (*box ones)
 
 %Draw one row of the opening lead section at once. 6 arguments:
 %\showlead{cardstodisplay}{boldcards}{redcards}{circledcards}{startingx}{startingy}
@@ -242,15 +282,6 @@
     \usetikzlibrary{scopes}%
     \usetikzlibrary{calc}%needed to position stuff in strings
     \begin{tikzpicture}[xscale=0.2,yscale=0.1,
-        t/.style={text depth=.1\baselineskip,
-                  text height=.5\baselineskip},
-        box/.style={rectangle,draw=black,inner sep=3pt},
-        cbox/.style={rectangle,draw=black,fill=black,inner sep=3pt},
-        rbox/.style={rectangle,draw=red,inner sep=3pt},
-        crbox/.style={rectangle,draw=red,fill=red,inner sep=3pt},
-        bbox/.style={rectangle,draw=blue,inner sep=3pt},
-        cbbox/.style={rectangle,draw=blue,fill=blue,inner sep=3pt},
-        header/.style={right, rectangle, rotate=90, white, inner sep=3pt},
     ]
     % draw a box around everything
     \draw (101, 0) -- (101, 215) -- (203, 215) -- (203, 0) -- cycle;
@@ -784,15 +815,6 @@
     \end{tikzpicture}%
     \newpage;
     \begin{tikzpicture}[xscale=0.2,yscale=0.1,
-        t/.style={text depth=.1\baselineskip,
-                  text height=.5\baselineskip},
-        box/.style={rectangle,draw=black,inner sep=3pt},
-        cbox/.style={rectangle,draw=black,fill=black,inner sep=3pt},
-        rbox/.style={rectangle,draw=red,inner sep=3pt},
-        crbox/.style={rectangle,draw=red,fill=red,inner sep=3pt},
-        bbox/.style={rectangle,draw=blue,inner sep=3pt},
-        cbbox/.style={rectangle,draw=blue,fill=blue,inner sep=3pt},
-        header/.style={right, rectangle, rotate=90, white, inner sep=3pt},
     ]
     % draw a box around everything
     \draw (0, 0) -- (0, 215) -- (101, 215) -- (101, 0) -- cycle;
