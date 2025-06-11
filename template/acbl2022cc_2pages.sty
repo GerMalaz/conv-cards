@@ -91,6 +91,23 @@
 \colorlet{regularNoGuideline}{black}
 \colorlet{regularNoGuidelineLabel}{black}
 
+%define boolean to use in functions
+\newboolean{guide} %Label, NoGuideline will turn it off
+
+%define commands to use/redefine in functions
+\newcommand\name{}
+\newcommand\position{}
+\newcommand\direction{}
+\newcommand\checkColor{}
+\newcommand\rosewind{}
+\newcommand\category{}
+\newcommand\labelIndex{3}
+\newcommand\checkboxIndex{2}
+\newcommand\rangeIndex{1}
+\newcommand\textIndex{0}
+\newcommand\letterspace{}
+\newcommand\fitstyle{}
+
 %Commands to provide filled vs. empty checkboxes
 %according to whether a boolean is set or cleared:
 \newcommand{\checkbox}[1]{\ifthenelse{\boolean{#1}}{\node [cbox]}{\node [box]}}
