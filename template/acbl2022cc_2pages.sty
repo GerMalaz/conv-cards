@@ -279,9 +279,13 @@
 % pfix.  Unfortunately this can not be done for "every node" because it
 % expands the checkboxes.
 \newcommand{\drawconventioncard}{%
+    \pagestyle{empty}
+    \let\svmaketitle\maketitle
+    \def\maketitle{\svmaketitle\thispagestyle{empty}}
     \usetikzlibrary{scopes}%
     \usetikzlibrary{calc}%needed to position stuff in strings
-    \begin{tikzpicture}[xscale=0.2,yscale=0.1,
+    \usetikzlibrary{fit}%
+    \begin{tikzpicture}[xscale=0.2,yscale=0.125,
     ]
     % draw a box around everything
     \draw (101, 0) -- (101, 215) -- (203, 215) -- (203, 0) -- cycle;
@@ -811,10 +815,11 @@
     \guideline{105}{202}{5.5}
     \node [t, right] at (104, 3) {\regtext{\footnotesbottom}};
     \guideline{105}{202}{1.5}
-
+    \node [right] at (105,-2) {\scriptsize \textsf{\currfilename: \printfdate{ISOext}. Front of Convention Card}};
+    \node [right] at (160,-2) {\scriptsize \textsf{Made with \LaTeX\ and acbl2022cc (github.com/mycroftw/conv-cards)}};
     \end{tikzpicture}%
     \newpage;
-    \begin{tikzpicture}[xscale=0.2,yscale=0.1,
+    \begin{tikzpicture}[xscale=0.2,yscale=0.125,
     ]
     % draw a box around everything
     \draw (0, 0) -- (0, 215) -- (101, 215) -- (101, 0) -- cycle;
@@ -1318,8 +1323,8 @@
     \node [t, right] at (55, 3) {\regtext{\ntexceptbottom}};
 	\guideline{55}{100}{1.5}
 
-    \node [right] at (3,-2) {\scriptsize \textsf{\currfilename: \today{}.}};
-    \node [right] at (103,-2) {\tRegtext{\textls[10]{Made with \LaTeX\ and acbl2022cc (github.com/mycroftw/conv-cards)}}};
+    \node [right] at (3,-2) {\scriptsize \textsf{\currfilename: \printfdate{ISOext}. Back of Convention Card}};
+    \node [right] at (58,-2) {\scriptsize \textsf{Made with \LaTeX\ and acbl2022cc (github.com/mycroftw/conv-cards)}};
     \additionaltikz %optional extra user-defined fields
     \end{tikzpicture}%
 }%end of \drawconventioncard
