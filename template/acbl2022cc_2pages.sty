@@ -101,6 +101,8 @@
 \newcommand\checkColor{}
 \newcommand\rosewind{}
 \newcommand\category{}
+\newcommand\content{}
+\newcommand\textlsnum{}
 \newcommand\labelIndex{3}
 \newcommand\checkboxIndex{2}
 \newcommand\rangeIndex{1}
@@ -171,6 +173,7 @@
 }%foreach
 }
 
+
 % Guide lines: triggered by a "visib" boolean set in the file, draw the "write here" lines.  Or not.
 % Parameters: Xleft, Xright, Y (all guidelines are horizontal).
 \newcommand{\guideline}[3]{\ifthenelse{\boolean{visib}}{\draw [thin, black] (#1, #3) -- (#2, #3);}{}}
@@ -184,6 +187,210 @@
 \newcommand{\pfix}{\rule{0pt}{2.6mm}} %A way to re-center user text with p,y,g
 \newcommand{\xfix}{\rule{0pt}{2.0mm}} %re-center text with no capital letters
 \newcommand{\namefix}{\rule{0pt}{3.4mm}} %re-center BigBold text with p,y,g
+
+\newcommand{\IfNoValueOrEmptyTF}[3] {
+    \IfNoValueTF{#1}
+        {#2}
+        {\ifthenelse{\equal{#1}{}}{#2}{#3}}
+}
+
+\NewDocumentCommand{\labeledCheckbox}{mmmmmm}{
+   % mandatory: name (there must be a boolean defined with this name),
+   % mandatory: label, position, direction, color, style
+    \renewcommand\name{#1}
+    \renewcommand\label{#2}
+    \renewcommand\position{#3}
+    \renewcommand\direction{#4}
+    \renewcommand\checkColor{#5}
+    \renewcommand\fitstyle{#6}
+    \tikzset{\name/.style = {box, draw=\checkColor}}
+    \ifthenelse{\boolean{\name}}
+        {\tikzset{\name/.append style = {fill=\checkColor}}}
+        {}
+    \IfValueTF{\fitstyle}
+        {\tikzset{\name/.append style = {\fitstyle}}}
+        {}
+    \IfStrEqCase{\direction}{
+        {right}
+            {
+                \node[t, \direction] at (\position) (\name_label) {\tColortext{\label}{\checkColor}};
+                \node[\name] at (\name_label.east) (\name_box) {};
+            }
+        {left}
+            {
+                \node[\name] at (\position) (\name_box) {};
+                \node[t, \direction] at (\name_box.west) (\name_label) {\tColortext{\label}{\checkColor}};
+            }
+    }[{Error}]
+    \node[block, fit=(\name_label)(\name_box)] (\name) {}
+}
+
+\NewDocumentCommand{\textField}{mmmmmmO{}}{
+    % mandatory: name, position, direction, category,
+    % mandatory: content, style,
+    % optional: textlsnum
+    \setboolean{guide}{true}
+    \IfSubStringInString{Label}{#4}
+        {\setboolean{guide}{false}}
+        {}
+    \IfSubStringInString{NoGuideline}{#4}
+        {\setboolean{guide}{false}}
+        {}
+    \tikzset{#1/.style = {t, #3, textField=#4}}
+    \setsepchar{,}
+    \readlist*\styles{#6,}
+    \foreachitem\style\in\styles{
+        \tikzset{#1/.append style/.expanded={\style}}
+    }
+    \IfSubStringInString{Label}{#4}
+        {
+            \ifthenelse{\equal{#7}{}}
+                {\renewcommand\letterspace{-50}}
+                {\renewcommand\letterspace{#7}}
+            \node[#1] at (#2) (#1) {\textls[\letterspace]{#5}};
+        }
+        {
+            \ifthenelse{\equal{#7}{}}
+                {\renewcommand\letterspace{-30}}
+                {\renewcommand\letterspace{#7}}
+            \node[#1] at (#2) (#1) {\usertext{\textls[\letterspace]{#5}}};
+        }
+    \path
+        (#1.base west) -- (#1.south west)
+                    coordinate[pos=0.5] (mid-base-sw)
+        (#1.base east) -- (#1.south east)
+                    coordinate[pos=0.5] (mid-base-se);
+    \ifthenelse{\boolean{visib} \AND \boolean{guide}}
+        {\draw[#4, thin] (mid-base-se) -- (mid-base-sw);}
+        {}
+}
+
+\NewDocumentCommand{\block}{mmmmmmmmo}{
+    % mandatory: name, position, direction, elements, category,
+    % mandatory: labelParameter: labelContent@labelStyle@
+    %                            (optional)labelLetterspace
+    % mandatory: rangeParameter: rangeLowContent@rangeHighContent@rangeStyle
+    % mandatory: textParameter: textContent@textStyle@
+    %                           (optional)textLetterspace
+    % optional:  fitstyle
+
+    \renewcommand\name{#1}
+    \renewcommand\position{#2}
+    \renewcommand\direction{#3}
+    \bitsetSetBin{elements}{#4}
+    \bitsetIsEmpty{elements}{}{
+        \bitsetQuery{elements}{\labelIndex}
+            {
+                \setsepchar{@}
+                \readlist*\labelParameter{#6@@}
+                \itemtomacro\labelParameter[1]\labelContent
+                \itemtomacro\labelParameter[2]\labelStyle
+                \itemtomacro\labelParameter[3]\labelLetterspace
+            }
+            {}
+        \bitsetQuery{elements}{\checkboxIndex}
+            {
+                \tikzset{\name_checkbox/.style = {checkBox=#5, xshift=3}}
+                \ifthenelse{\boolean{\name}}
+                    {\tikzset{\name_checkbox/.append style = {filled=#5}}}
+                    {}
+            }
+            {}
+        \bitsetQuery{elements}{\rangeIndex}
+            {
+                \setsepchar{@}
+                \readlist*\rangeParameter{#7@}
+                \renewcommand\rangeLowContent\rangeParameter[1]
+                \renewcommand\rangeHighContent\rangeParameter[2]
+                \renewcommand\rangeStyle\rangeParameter[3]
+            }
+            {}
+        \bitsetQuery{elements}{\textIndex}
+            {
+                \setsepchar{@}
+                \readlist*\textParameter{#8@@}
+                \itemtomacro\textParameter[1]\textContent
+                \itemtomacro\textParameter[2]\textStyle
+                \itemtomacro\textParameter[3]\textLetterspace
+            }
+            {}
+    }
+    \bitsetIsEmpty{elements}{\node[] at (\position) (\name) {}; }{
+        \IfStrEqCase{\direction}{
+            {right}
+                {
+                    \renewcommand\rosewind{east}
+                    \bitsetQuery{elements}{\labelIndex}
+                        {
+                            \textField{\name_label}{\position}{\direction}{#5Label}
+                                    {\labelContent}{ label, \labelStyle}
+                                    [\labelLetterspace]
+                            \renewcommand\position{\name_label.\rosewind}
+                        }
+                        { \node[] at (\position) (\name_label) {}; }
+                    \bitsetQuery{elements}{\checkboxIndex}
+                        {
+                            \node[\name_checkbox] at (\position) (\name_checkbox) {};
+                            \renewcommand\position{\name_checkbox.\rosewind}
+                        }
+                        { \node[] at (\position) (\name_checkbox) {}; }
+                    \bitsetQuery{elements}{\rangeIndex}
+                        {
+                        }
+                        { \node[] at (\position) (\name_range) {}; }
+                    \bitsetQuery{elements}{\textIndex}
+                        {
+                            \textField{\name_text}{\position}{\direction}{#5}
+                                    {\textContent}{\textStyle}
+                                    [\textLetterspace]
+                            \renewcommand\position{\name_text.\rosewind}
+                        }
+                        { \node[] at (\position) (\name_text) {}; }
+                }
+            {left}
+                {
+                    \renewcommand\rosewind{west}
+                    \bitsetQuery{elements}{\textIndex}
+                        {
+                            \textField{\name_text}{\position}{\direction}{#5}
+                                    {\textContent}{\textStyle}
+                                    [\textLetterspace]
+                            \renewcommand\position{\name_text.\rosewind}
+                        }
+                        { \node[] at (\position) (\name_text) {}; }
+                    \bitsetQuery{elements}{\rangeIndex}
+                        {
+                        }
+                        { \node[] at (\position) (\name_range) {}; }
+                    \bitsetQuery{elements}{\checkboxIndex}
+                        {
+                            \node[\name_checkbox] at (\position) (\name_checkbox) {};
+                            \renewcommand\position{\name_checkbox.\rosewind}
+                        }
+                        { \node[] at (\position) (\name_checkbox) {}; }
+                    \bitsetQuery{elements}{\labelIndex}
+                        {
+                            \textField{\name_label}{\position}{\direction}{#5Label}
+                                    {\labelContent}{ label, \labelStyle}
+                                    [\labelLetterspace]
+                            \renewcommand\position{\name_label.\rosewind}
+                        }
+                        { \node[] at (\position) (\name_label) {}; }
+                }
+        }[{Error}]
+        \IfNoValueOrEmptyTF{#9}
+            {}
+            {
+                \setsepchar{,}
+                \readlist*\styles{#9,}
+                \foreachitem\style\in\styles{
+                    \tikzset{\name/.append style/.expanded={\style}}
+                }
+            }
+        \node[block, fit=(\name_label)(\name_checkbox)(\name_text) ] (\name) {};
+    }
+}
+
 
 %We have to initialize a million booleans (OK, only 207), for the state of every
 %checkbox on the convention card:
