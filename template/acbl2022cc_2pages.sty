@@ -272,7 +272,9 @@
     % mandatory: name, position, direction, elements, category,
     % mandatory: labelParameter: labelContent@labelStyle@
     %                            (optional)labelLetterspace
-    % mandatory: rangeParameter: rangeLowContent@rangeHighContent@rangeStyle
+    % mandatory: rangeParameter: rangeLowContent@rangeHighContent@rangeConnector@
+    %                            rangeContentStyle@rangeConnectorStyle@
+    %                           (optional)rangeLetterspace
     % mandatory: textParameter: textContent@textStyle@
     %                           (optional)textLetterspace
     % optional:  fitstyle
@@ -302,10 +304,13 @@
         \bitsetQuery{elements}{\rangeIndex}
             {
                 \setsepchar{@}
-                \readlist*\rangeParameter{#7@}
-                \renewcommand\rangeLowContent\rangeParameter[1]
-                \renewcommand\rangeHighContent\rangeParameter[2]
-                \renewcommand\rangeStyle\rangeParameter[3]
+                \readlist*\rangeParameter{#7@@@@@}
+                \itemtomacro\rangeParameter[1]\rangeContentLow
+                \itemtomacro\rangeParameter[2]\rangeContentHigh
+                \itemtomacro\rangeParameter[3]\rangeConnector
+                \itemtomacro\rangeParameter[4]\rangeContentStyle
+                \itemtomacro\rangeParameter[5]\rangeConnectorStyle
+                \itemtomacro\rangeParameter[6]\rangeLetterspace
             }
             {}
         \bitsetQuery{elements}{\textIndex}
@@ -339,6 +344,18 @@
                         { \node[] at (\position) (\name_checkbox) {}; }
                     \bitsetQuery{elements}{\rangeIndex}
                         {
+                            \textField{#1_range_lo}{\position}{\direction}{#5}
+                                    {\rangeContentLow}{\rangeContentStyle}
+                                    [\rangeLetterspace]
+                            \renewcommand\position{#1_range_lo.\rosewind}
+                            \textField{#1_range_connector}{\position}{\direction}{#5NoGuideline}
+                                    {\rangeConnector}{\rangeConnectorStyle}
+                                    [\rangeLetterspace]
+                            \renewcommand\position{#1_range_connector.\rosewind}
+                            \textField{#1_range_hi}{\position}{\direction}{#5}
+                                    {\rangeContentHigh}{\rangeContentStyle}
+                                    [\rangeLetterspace]
+                            \node[block, fit=(#1_range_lo)(#1_range_connector)(#1_range_hi)] (#1_range) {};
                         }
                         { \node[] at (\position) (\name_range) {}; }
                     \bitsetQuery{elements}{\textIndex}
@@ -363,6 +380,18 @@
                         { \node[] at (\position) (\name_text) {}; }
                     \bitsetQuery{elements}{\rangeIndex}
                         {
+                            \textField{#1_range_hi}{\position}{\direction}{#5}
+                                    {\rangeContentHigh}{\rangeContentStyle}
+                                    [\rangeLetterspace]
+                            \renewcommand\position{#1_range_hi.\rosewind}
+                            \textField{#1_range_connector}{\position}{\direction}{#5NoGuideline}
+                                    {\rangeConnector}{\rangeConnectorStyle}
+                                    [\rangeLetterspace]
+                            \renewcommand\position{#1_range_connector.\rosewind}
+                            \textField{#1_range_lo}{\position}{\direction}{#5}
+                                    {\rangeContentLow}{\rangeContentStyle}
+                                    [\rangeLetterspace]
+                            \node[block, fit=(#1_range_lo)(#1_range_connector)(#1_range_hi)] (#1_range) {};
                         }
                         { \node[] at (\position) (\name_range) {}; }
                     \bitsetQuery{elements}{\checkboxIndex}
