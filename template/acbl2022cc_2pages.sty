@@ -392,12 +392,13 @@
 }
 
 
-%We have to initialize a million booleans (OK, only 207), for the state of every
+%We have to initialize a million booleans (OK, only 208), for the state of every
 %checkbox on the convention card:
 
 %Listed below in order from top to bottom, front then back, of the card.
 %Generally every item has a 5-letter abbreviated name.
-\newboolean{visib}\newboolean{serif}\newboolean{fo1c}\newboolean{fo2c}
+\newboolean{visib}\newboolean{serif}
+\newboolean{fo1c}\newboolean{fo2c}\newboolean{footh}
 \newboolean{1nts}\newboolean{1ntw}\newboolean{1ntv}
 % 1C - 19
 \newboolean{club5}\newboolean{club4}\newboolean{club3}\newboolean{cl2nf}
@@ -533,6 +534,11 @@
     \node [left] at (203, 212) {\tBoldtext{\textls[-20]{\playernumber}}};
 
 % Overview:
+% set private booleans based on strings being defined or not.
+    \IfNoValueOrEmptyTF{\foothertext}
+        {\setboolean{footh}{false}}
+        {\setboolean{footh}{true}}
+
     \node [t, right] at (104, 205.5) {\headtext{General Approach}};
     \node [t] at (160, 206) {\bigboldtext{\generalapproach}};
     \guideline{132}{202}{204}
