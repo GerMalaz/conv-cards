@@ -269,19 +269,30 @@
 }
 
 \NewDocumentCommand{\block}{mmmmmmmmo}{
-    % mandatory: name, position, direction, elements, category,
-    % mandatory: labelParameter: labelContent@labelStyle@
-    %                            (optional)labelLetterspace
-    % mandatory: rangeParameter: rangeLowContent@rangeHighContent@rangeConnector@
-    %                            rangeContentStyle@rangeConnectorStyle@
-    %                           (optional)rangeLetterspace
-    % mandatory: textParameter: textContent@textStyle@
-    %                           (optional)textLetterspace
-    % optional:  fitstyle
+    % #1: name
+    % #2: position
+    % #3: direction
+    % #4: elements (bitset)
+    % #5: category
+    % #6: labelParameter
+    %         labelContent@
+    %         labelStyle@
+    %         (optional) labelLetterspace
+    % #7: rangeParameter
+    %         rangeContentLow@
+    %         rangeContentHigh@
+    %         rangeConnector@
+    %         rangeContentStyle@
+    %         rangeConnectorStyle@
+    %         (optional) rangeLetterspace
+    % #8: textParameter
+    %         textContent@
+    %         textStyle@
+    %         (optional) textLetterspace
+    % #9: (optional) Style
+    % All *Style parameters are comma-separated lists
 
-    \renewcommand\name{#1}
     \renewcommand\position{#2}
-    \renewcommand\direction{#3}
     \bitsetSetBin{elements}{#4}
     \bitsetIsEmpty{elements}{}{
         \bitsetQuery{elements}{\labelIndex}
@@ -295,9 +306,9 @@
             {}
         \bitsetQuery{elements}{\checkboxIndex}
             {
-                \tikzset{\name_checkbox/.style = {checkBox=#5, xshift=3}}
-                \ifthenelse{\boolean{\name}}
-                    {\tikzset{\name_checkbox/.append style = {filled=#5}}}
+                \tikzset{#1_checkbox/.style = {checkBox=#5, xshift=3}}
+                \ifthenelse{\boolean{#1}}
+                    {\tikzset{#1_checkbox/.append style = {filled=#5}}}
                     {}
             }
             {}
@@ -323,91 +334,91 @@
             }
             {}
     }
-    \bitsetIsEmpty{elements}{\node[] at (\position) (\name) {}; }{
-        \IfStrEqCase{\direction}{
+    \bitsetIsEmpty{elements}{\node[] at (\position) (#1) {}; }{
+        \IfStrEqCase{#3}{
             {right}
                 {
                     \renewcommand\rosewind{east}
                     \bitsetQuery{elements}{\labelIndex}
                         {
-                            \textField{\name_label}{\position}{\direction}{#5Label}
+                            \textField{#1_label}{\position}{#3}{#5Label}
                                     {\labelContent}{ label, \labelStyle}
                                     [\labelLetterspace]
-                            \renewcommand\position{\name_label.\rosewind}
+                            \renewcommand\position{#1_label.\rosewind}
                         }
-                        { \node[] at (\position) (\name_label) {}; }
+                        { \node[] at (\position) (#1_label) {}; }
                     \bitsetQuery{elements}{\checkboxIndex}
                         {
-                            \node[\name_checkbox] at (\position) (\name_checkbox) {};
-                            \renewcommand\position{\name_checkbox.\rosewind}
+                            \node[#1_checkbox] at (\position) (#1_checkbox) {};
+                            \renewcommand\position{#1_checkbox.\rosewind}
                         }
-                        { \node[] at (\position) (\name_checkbox) {}; }
+                        { \node[] at (\position) (#1_checkbox) {}; }
                     \bitsetQuery{elements}{\rangeIndex}
                         {
-                            \textField{#1_range_lo}{\position}{\direction}{#5}
+                            \textField{#1_range_lo}{\position}{#3}{#5}
                                     {\rangeContentLow}{\rangeContentStyle}
                                     [\rangeLetterspace]
                             \renewcommand\position{#1_range_lo.\rosewind}
-                            \textField{#1_range_connector}{\position}{\direction}{#5NoGuideline}
+                            \textField{#1_range_connector}{\position}{#3}{#5NoGuideline}
                                     {\rangeConnector}{\rangeConnectorStyle}
                                     [\rangeLetterspace]
                             \renewcommand\position{#1_range_connector.\rosewind}
-                            \textField{#1_range_hi}{\position}{\direction}{#5}
+                            \textField{#1_range_hi}{\position}{#3}{#5}
                                     {\rangeContentHigh}{\rangeContentStyle}
                                     [\rangeLetterspace]
                             \node[block, fit=(#1_range_lo)(#1_range_connector)(#1_range_hi)] (#1_range) {};
                         }
-                        { \node[] at (\position) (\name_range) {}; }
+                        { \node[] at (\position) (#1_range) {}; }
                     \bitsetQuery{elements}{\textIndex}
                         {
-                            \textField{\name_text}{\position}{\direction}{#5}
+                            \textField{#1_text}{\position}{#3}{#5}
                                     {\textContent}{\textStyle}
                                     [\textLetterspace]
-                            \renewcommand\position{\name_text.\rosewind}
+                            \renewcommand\position{#1_text.\rosewind}
                         }
-                        { \node[] at (\position) (\name_text) {}; }
+                        { \node[] at (\position) (#1_text) {}; }
                 }
             {left}
                 {
                     \renewcommand\rosewind{west}
                     \bitsetQuery{elements}{\textIndex}
                         {
-                            \textField{\name_text}{\position}{\direction}{#5}
+                            \textField{#1_text}{\position}{#3}{#5}
                                     {\textContent}{\textStyle}
                                     [\textLetterspace]
-                            \renewcommand\position{\name_text.\rosewind}
+                            \renewcommand\position{#1_text.\rosewind}
                         }
-                        { \node[] at (\position) (\name_text) {}; }
+                        { \node[] at (\position) (#1_text) {}; }
                     \bitsetQuery{elements}{\rangeIndex}
                         {
-                            \textField{#1_range_hi}{\position}{\direction}{#5}
+                            \textField{#1_range_hi}{\position}{#3}{#5}
                                     {\rangeContentHigh}{\rangeContentStyle}
                                     [\rangeLetterspace]
                             \renewcommand\position{#1_range_hi.\rosewind}
-                            \textField{#1_range_connector}{\position}{\direction}{#5NoGuideline}
+                            \textField{#1_range_connector}{\position}{#3}{#5NoGuideline}
                                     {\rangeConnector}{\rangeConnectorStyle}
                                     [\rangeLetterspace]
                             \renewcommand\position{#1_range_connector.\rosewind}
-                            \textField{#1_range_lo}{\position}{\direction}{#5}
+                            \textField{#1_range_lo}{\position}{#3}{#5}
                                     {\rangeContentLow}{\rangeContentStyle}
                                     [\rangeLetterspace]
                             \node[block, fit=(#1_range_lo)(#1_range_connector)(#1_range_hi)] (#1_range) {};
                         }
-                        { \node[] at (\position) (\name_range) {}; }
+                        { \node[] at (\position) (#1_range) {}; }
                     \bitsetQuery{elements}{\checkboxIndex}
                         {
-                            \node[\name_checkbox] at (\position) (\name_checkbox) {};
-                            \renewcommand\position{\name_checkbox.\rosewind}
+                            \node[#1_checkbox] at (\position) (#1_checkbox) {};
+                            \renewcommand\position{#1_checkbox.\rosewind}
                         }
-                        { \node[] at (\position) (\name_checkbox) {}; }
+                        { \node[] at (\position) (#1_checkbox) {}; }
                     \bitsetQuery{elements}{\labelIndex}
                         {
-                            \textField{\name_label}{\position}{\direction}{#5Label}
+                            \textField{#1_label}{\position}{#3}{#5Label}
                                     {\labelContent}{ label, \labelStyle}
                                     [\labelLetterspace]
-                            \renewcommand\position{\name_label.\rosewind}
+                            \renewcommand\position{#1_label.\rosewind}
                         }
-                        { \node[] at (\position) (\name_label) {}; }
+                        { \node[] at (\position) (#1_label) {}; }
                 }
         }[{Error}]
         \IfNoValueOrEmptyTF{#9}
@@ -416,10 +427,10 @@
                 \setsepchar{,}
                 \readlist*\styles{#9,}
                 \foreachitem\style\in\styles{
-                    \tikzset{\name/.append style/.expanded={\style}}
+                    \tikzset{#1/.append style/.expanded={\style}}
                 }
             }
-        \node[block, fit=(\name_label)(\name_checkbox)(\name_text) ] (\name) {};
+        \node[block, fit=(#1_label)(#1_checkbox)(#1_text) ] (#1) {};
     }
 }
 
