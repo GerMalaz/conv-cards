@@ -229,9 +229,15 @@
 }
 
 \NewDocumentCommand{\textField}{mmmmmmO{}}{
-    % mandatory: name, position, direction, category,
-    % mandatory: content, style,
-    % optional: textlsnum
+    % #1: name
+    % #2: position
+    % #3: direction
+    % #4: category
+    % #5: content
+    % #6: style
+    % #7: (optional) letterspace
+    % All *Style parameters are comma-separated lists
+
     \setboolean{guide}{true}
     \IfSubStringInString{Label}{#4}
         {\setboolean{guide}{false}}
