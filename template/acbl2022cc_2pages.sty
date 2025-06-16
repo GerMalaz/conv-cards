@@ -580,9 +580,13 @@
     }
 
 % Names:
-    \node [t, right] at (101, 212) (names) {\bigboldtext{Names:}};
-    \node [right] at (names.east) {\bigboldtext{\textls[-20]{\names}}};
-    \node [left] at (203, 212) {\tBoldtext{\textls[-20]{\playernumber}}};
+    \block{names}{101,212}{right}{1001}{regularNoGuideline}
+         {Names:@big,bold}
+         {}
+         {\names @big,bold}
+    \block{playernumber}{203, 212}{left}{0001}{regularNoGuideline}
+         {}{}
+         {\playernumber @big,bold}
 
 % Overview:
 % set private booleans based on strings being defined or not.
@@ -590,33 +594,59 @@
         {\setboolean{footh}{false}}
         {\setboolean{footh}{true}}
 
-    \node [t, right] at (104, 205.5) {\headtext{General Approach}};
-    \node [t] at (160, 206) {\bigboldtext{\generalapproach}};
-    \guideline{132}{202}{204}
-    \node [t, right] at (104, 201) (mhbo) {\tRegtext{Min Expected HCP when Balanced: Opening}};
-    \node [t] at (162, 201) {\regtext{\minHCPopen}};
-    \guideline{156}{168}{199.5}
-    \node [t, right] at (168, 201) (mhbr) {\tRegtext{Responding}};
-    \node [t] at (191, 201) {\regtext{\minHCPresp}};
-    \guideline{184}{202}{199.5}
+    \block{genapproachlabel}{104, 205.5}{right}{1000}{regular}
+        {General Approach@bold}
+        {}{}
+    \block{genapproach}{203, 205.5}{left}{0001}{regular}
+        {}{}
+        {\generalapproach @text width=440, centered, bold}
+    \block{mhb}{104, 201}{right}{1000}{regular}
+        {Min Expected HCP when Balanced:@italicsLabel}
+        {}{}
+    \block{mhbo}{mhb.east}{right}{1001}{regular}
+        {Opening}
+        {}
+        {\minHCPopen @text width=190}
+    \block{mhbr}{203, 201}{left}{1001}{regular}
+        {Responding}
+        {}
+        {\minHCPresp @text width=70, centered}
 
-    \rcheckbox{fo1c} at (127, 197) (fo1c) {};
-    \node [t, left, xshift=1mm] at (fo1c.west) {\tRegtext{Forcing Open: }\tRedbold{1\,\c\ }};
-    \checkbox{fo2c} at (135, 197) (fo2c) {};
-    \node [t, left, xshift=0.5mm] at (fo2c.west) {\tBoldtext{2\,\c\ }};
-    \node [t, right] at (145, 197) (foother) {\redreg{\foothertext}};
-    \node [t, left, xshift=1mm] at (foother.west) {\tRedreg{Other:}};
-    \rguideline{145}{160}{195.5}
-    \checkbox{1nts} at (179,197) (1nts) {};
-    \node [t, left, xshift=1mm] at (1nts.west) {\tRegtext{1NT Open: Str\,}};
-    \node [t, right, xshift=0mm] at (1nts.east) (1ntw) {\tRegtext{Wk\,}};
-    \checkbox{1ntw} at (1ntw.east) (1ntwbox) {};
-    \node [t, right] at (1ntwbox) (1ntv) {\tRegtext{ Variable\,}};
-    \checkbox{1ntv} at (1ntv.east) {};
+    \block{fohdr}{104,197}{right}{1000}{regular}
+        {Forcing Opening:}
+        {}{}
+    \block{fo1c}{fohdr.east}{right}{1100}{alert}
+        {1\bc}
+        {}{}
+    \block{fo2c}{fo1c.east}{right}{1100}{regular}
+        {2\bc}
+        {}{}
+    \block{footh}{fo2c.east}{right}{1101}{alert}
+        {Other}
+        {}
+        {\foothertext @text width=150}
+    \block{1ntv}{201, 197}{left}{1100}{regular}
+        {Variable}
+        {}{}
+    \block{1ntw}{1ntv.west}{left}{1100}{regular}
+        {Weak}
+        {}{}
+    \block{1nts}{1ntw.west}{left}{1100}{regular}
+        {Strong}
+        {}{}
+    \block{1nthead}{1nts.west}{left}{1000}{regular}
+        {1NT Opening:}
+        {}{}
 
-    \node[t, right] at (104, 193) (btmrp) {\tRegtext{Bids That May Require Preparation:\ }\boldtext{\bidspreptop}};
-    \guideline{144}{202}{191.5}
-    \node[t, right] at (110, 189) {\boldtext{\bidsprepbottom}};
+    \block{btmrp}{104,193}{right}{1000}{regular}
+        {Bids That May\\Require Preparation: @text width=110}
+        {}{}
+    \block{btmrp1}{203, 193}{left}{0001}{regular}
+        {}{}
+        {\bidspreptop @text width=465, bold}
+    \block{btmrp2}{203, 189}{left}{0001}{regularNoGuideline}
+        {}{}
+        {\bidsprepbottom @text width=465, bold}
 
 % 1C opening
 
