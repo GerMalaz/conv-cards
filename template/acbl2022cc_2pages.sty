@@ -784,63 +784,73 @@
         {Inv}{}{}
 
 % Major Openings
-    \node [t, right] at (104, 137.5) {\bigtext{1\rh/\s\ }};
+    \block{1dhdr}{104,137.5}{right}{1000}{regular}
+        {1\rh/\bs@bidHeader}{}{}
+    \block{1maj12len}{107,133}{right}{1000}{regular}
+        {1\textsuperscript{st}/2\textsuperscript{nd} Length:}{}{}
+    \block{h12l4}{1maj12len.east}{right}{1100}{regular}
+        {4}{}{}
+    \block{h12l5}{h12l4.east}{right}{1100}{regular}
+        {5}{}{}
+    \block{1maj34len}{107,130}{right}{1000}{regular}
+        {3\textsuperscript{rd}/4\textsuperscript{th} Length:}{}{}
+    \block{h34l4}{1maj34len.east}{right}{1100}{regular}
+        {4}{}{}
+    \block{h34l5}{h34l4.east}{right}{1100}{regular}
+        {5}{}{}
 
-    \node [t, right] at (107, 133) {\tRegtext{1\textsuperscript{st}/2\textsuperscript{nd} Length:}};
-    \node [t, right] at (124, 133) (h12length4) {\tRegtext{4\,}};
-    \checkbox{h12l4} at (h12length4.east) (h12l4) {};
-    \node [t, right] at (h12l4.east) (h12length5) {\tRegtext{5\,}};
-    \checkbox{h12l5} at (h12length5.east) {};
-    \node [t, right] at (107, 130) {\tRegtext{3\textsuperscript{rd}/4\textsuperscript{th} Length:}};
-    \node [t, right] at (124, 130) (h34length4) {\tRegtext{4\,}};
-    \checkbox{h34l4} at (h34length4.east) (h34l4) {};
-    \node [t, right] at (h34l4.east) (h34length5) {\tRegtext{5\,}};
-    \checkbox{h34l5} at (h34length5.east) {};
+    \block{1m1ntf}{107,127}{right}{1000}{announce}
+        {1\,NT:}{}{}
+    \block{ntfor}{1m1ntf.east}{right}{1100}{regular}
+        {F}{}{}
+    \block{ntsem}{ntfor.east}{right}{1100}{regular}
+        {Semi-F}{}{}
+    \block{ntbps}{ntsem.east}{right}{1100}{regular}
+        {Bypass\,\bs}{}{}
 
-    \node [t, right] at (107, 127) (1m1ntf) {\tBluereg{1\,NT: F\,}};
-    \bcheckbox{ntfor} at (1m1ntf.east) (ntforbox) {};
-    \node [t, right] at (ntforbox.east) (1m1ntsf) {\tBluereg{Semi-F\,}};
-    \bcheckbox{ntsem} at (1m1ntsf.east) (ntsembox) {};
-    \node [t, right] at (ntsembox.east) (1m1ntbypass) {\tBluereg{Bypass\,\bs\,}};
-    \bcheckbox{ntbps} at (1m1ntbypass.east) {};
+    \block{majothertop}{104,121}{right}{1001}{alert}
+        {Other:}{}{\majothertexttop}
+    \block{majotherbottom}{104,117}{right}{1001}{alert}
+        {}{}{\majothertextbottom}
 
-    \node [t, right] at (104, 121) (majother){\tRedreg{Other:\ }\redreg{\majothertexttop}};
-    \rguideline{113}{147}{119.5}
-    \node [t, right] at (104, 117) {\redreg{\majothertextbottom}};
-    \rguideline{105}{202}{115.5}
+    \block{1majraises}{149,138.3}{right}{1000}{alert}
+        {Art Raises:}{}{}
+    \block{ra2nt}{1majraises.east}{right}{1100}{alert}
+        {2NT}{}{}
+    \block{ra3nt}{ra2nt.east}{right}{1100}{alert}
+        {3NT}{}{}
+    \block{raspl}{ra3nt.east}{right}{1100}{alert}
+        {Splinter}{}{}
+    \block{majraiseother}{149,134}{right}{1001}{alert}
+        {Other:}{}{\majraisetext}
 
-    \node [t, right] at (149, 138.3) (1mra2nt) {\tRedreg{Art Raises: 2NT\,}};
-    \rcheckbox{ra2nt} at (1mra2nt.east) (ra2ntbox) {};
-    \node [t, right] at (ra2ntbox.east) (1mra3nt) {\tRedreg{3NT\,}};
-    \rcheckbox{ra3nt} at (1mra3nt.east) (ra3ntbox) {};
-    \node [t, right] at (ra3ntbox.east) (1mraspl) {\tRedreg{Splinter\,}};
-    \rcheckbox{raspl} at (1mraspl.east) {};
-    \node [t, right] at (149, 134) (majraise) {\tRedreg{Other:\ }\redreg{\majraisetext}};
-    \rguideline{158}{202}{132.5}
+    \block{drury}{149,130}{right}{1000}{alert}
+        {Drury:}{}{}
+    \block{dru2c}{drury.east}{right}{1100}{alert}
+        {2\,\bc}{}{}
+    \block{dru2d}{dru2c.east}{right}{1100}{alert}
+        {2\,\rd}{}{}
+    \block{drcmp}{dru2d.east}{right}{1100}{alert}
+        {In Comp}{}{}
+    \block{droth}{drcmp.east}{right}{0001}{alert}
+        {}{}{\majdrurytext}
 
-    \node [t, right] at (149, 130) (drury2c) {\tRedreg{Drury: 2\,\bc\,}};
-    \rcheckbox{dru2c} at (drury2c.east) (dru2cbox) {};
-    \node [t,right] at (dru2cbox.east) (drury2d) {\tRedreg{2\,\rd\,}};
-    \rcheckbox{dru2d} at (drury2d.east) (dru2dbox) {};
-    \node [t, right] at (dru2dbox.east) (drurycmp) {\tRedreg{In Comp\,}};
-    \rcheckbox{drcmp} at (drurycmp.east) (drcmpbox) {};
-    \node [t, right] at (drcmpbox.east) {\redreg{\majdrurytext}};
-    \rguideline{187}{202}{128.5}
-
-    \node [t, right] at (149, 125.5) {\tRegtext{Jump Raise:}};
-    \node [t, left] at (178, 125.5) (dblrw) {\tRedreg{Wk\,}};
-    \node [t, left] at (189, 125.5) (dblrm) {\tRedreg{Mixed\,}};
-    \node [t, left] at (198, 125.5) (dblri) {\tRegtext{Inv\,}};
-    \rcheckbox{dblrw} at (dblrw.east) {};
-    \rcheckbox{dblrm} at (dblrm.east) {};
-    \checkbox{dblri} at (dblri.east) {};
-    \node [t, right] at (153, 122) {\tRegtext{After Overcall:}};
-    \node [t, left] at (178, 122) (ocdrw) {\tRegtext{Wk\,}};
-    \node [t, left] at (189, 122) (ocdrm) {\tRegtext{Mixed\,}};
-    \node [t, left] at (198, 122) (ocdri) {\tRegtext{Inv\,}};
-    \checkbox{ocdrw} at (ocdrw.east) {};
-    \checkbox{ocdrm} at (ocdrm.east) {};
-    \checkbox{ocdri} at (ocdri.east) {};
+    \block{majraisejump}{149,125.5}{right}{1000}{regular}
+        {Jump Raise:}{}{}
+    \block{dblrw}{178,125.5}{left}{1100}{alert}
+        {Weak}{}{}
+    \block{dblrm}{189,125.5}{left}{1100}{alert}
+        {Mixed}{}{}
+    \block{dblri}{198,125.5}{left}{1100}{alert}
+        {Inv}{}{}
+    \block{majraiseafterovercall}{153,122}{right}{1000}{regular}
+        {After Overcall:}{}{}
+    \block{ocdrw}{178,122}{left}{1100}{regular}
+        {Weak}{}{}
+    \block{ocdrm}{189,122}{left}{1100}{regular}
+        {Mixed}{}{}
+    \block{ocdri}{198,122}{left}{1100}{regular}
+        {Inv}{}{}
 
 %1 NT opening:
  % set private booleans based on strings being empty or not.
