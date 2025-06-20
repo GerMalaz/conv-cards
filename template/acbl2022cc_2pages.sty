@@ -392,6 +392,7 @@
                             \textField{#1_range_hi}{\position}{#3}{#5}
                                     {\rangeContentHigh}{\rangeContentStyle}
                                     [\rangeLetterspace]
+                            \renewcommand\position{#1_range_hi.\rosewind}
                             \node[block, fit=(#1_range_lo)(#1_range_connector)(#1_range_hi)] (#1_range) {};
                         }
                         { \node[] at (\position) (#1_range) {}; }
@@ -428,6 +429,7 @@
                             \textField{#1_range_lo}{\position}{#3}{#5}
                                     {\rangeContentLow}{\rangeContentStyle}
                                     [\rangeLetterspace]
+                            \renewcommand\position{#1_range_lo.\rosewind}
                             \node[block, fit=(#1_range_lo)(#1_range_connector)(#1_range_hi)] (#1_range) {};
                         }
                         { \node[] at (\position) (#1_range) {}; }
@@ -456,7 +458,7 @@
                     \tikzset{#1/.append style/.expanded={\style}}
                 }
             }
-        \node[block, fit=(#1_label)(#1_checkbox)(#1_text) ] (#1) {};
+        \node[block, fit=(#1_label)(#1_checkbox)(#1_range)(#1_text) ] (#1) {};
     }
 }
 
