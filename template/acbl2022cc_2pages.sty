@@ -199,6 +199,14 @@
         {\ifthenelse{\equal{#1}{}}{#2}{#3}}
 }
 
+\makeatletter
+\newcommand{\gettikzxy}[3]{%
+  \tikz@scan@one@point\pgfutil@firstofone#1\relax
+  \edef#2{\the\pgf@x}%
+  \edef#3{\the\pgf@y}%
+}
+\makeatother
+
 \NewDocumentCommand{\labeledCheckbox}{mmmmmm}{
    % mandatory: name (there must be a boolean defined with this name),
    % mandatory: label, position, direction, color, style
@@ -269,13 +277,20 @@
                     \adjustbox{max width=\linewidth}{\usertext #5}
                 };
         }
-    \path
-        (#1.base west) -- (#1.south west)
-                    coordinate[pos=0.5] (mid-base-sw)
-        (#1.base east) -- (#1.south east)
-                    coordinate[pos=0.5] (mid-base-se);
     \ifthenelse{\boolean{visib} \AND \boolean{guide}}
-        {\draw[#4, thin] (mid-base-se) -- (mid-base-sw);}
+        {
+            \path
+                (#1.base west) -- (#1.south west)
+                            coordinate[pos=0.25] (mid-base-sw)
+                (#1.base east) -- (#1.south east)
+                            coordinate[pos=0.25] (mid-base-se);
+            \gettikzxy{(mid-base-sw)}{\xsw}{\ysw}
+            \gettikzxy{(mid-base-se)}{\xse}{\ysw}
+            \pgfmathqparse{\xse - \xsw}
+            \ifdim \pgfmathresult pt > 50pt
+                \draw[#4, thin] (mid-base-sw) -- (mid-base-se);
+            \fi
+        }
         {}
 }
 
