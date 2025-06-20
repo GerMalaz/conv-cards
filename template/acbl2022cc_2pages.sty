@@ -107,7 +107,6 @@
 \newcommand\name{}
 \newcommand\position{}
 \newcommand\direction{}
-\newcommand\checkColor{}
 \newcommand\rosewind{}
 \newcommand\category{}
 \newcommand\content{}
@@ -210,37 +209,6 @@
   \edef#3{\the\pgf@y}%
 }
 \makeatother
-
-\NewDocumentCommand{\labeledCheckbox}{mmmmmm}{
-   % mandatory: name (there must be a boolean defined with this name),
-   % mandatory: label, position, direction, color, style
-    \renewcommand\name{#1}
-    \renewcommand\label{#2}
-    \renewcommand\position{#3}
-    \renewcommand\direction{#4}
-    \renewcommand\checkColor{#5}
-    \renewcommand\fitstyle{#6}
-    \tikzset{\name/.style = {box, draw=\checkColor}}
-    \ifthenelse{\boolean{\name}}
-        {\tikzset{\name/.append style = {fill=\checkColor}}}
-        {}
-    \IfValueTF{\fitstyle}
-        {\tikzset{\name/.append style = {\fitstyle}}}
-        {}
-    \IfStrEqCase{\direction}{
-        {right}
-            {
-                \node[t, \direction] at (\position) (\name_label) {\tColortext{\label}{\checkColor}};
-                \node[\name] at (\name_label.east) (\name_box) {};
-            }
-        {left}
-            {
-                \node[\name] at (\position) (\name_box) {};
-                \node[t, \direction] at (\name_box.west) (\name_label) {\tColortext{\label}{\checkColor}};
-            }
-    }[{Error}]
-    \node[block, fit=(\name_label)(\name_box)] (\name) {}
-}
 
 \NewDocumentCommand{\textField}{mmmmmmO{}}{
     % #1: name
