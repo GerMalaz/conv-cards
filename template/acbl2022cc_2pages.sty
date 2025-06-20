@@ -894,111 +894,120 @@
         {\setboolean{2noth}{false}}
         {\setboolean{2noth}{true}}
 
-    \node [t, right] at (104, 110.5) {\bigblue{1NT}};
-    \node [t, right] at (120.5, 111.3) (1ntfirstrange) {\tBluereg{to}};
-    \node [t] at (118, 111.3) {\bluebold{\ntlowtext}};
-    \bguideline{115.5}{121}{109.8}
-    \node [t] at (126.5, 111.3) {\bluebold{\nthightext}};
-    \bguideline{124.5}{129}{109.8}
+    \block{1ntrange1}{104,110.5}{right}{1010}{announce}
+        {1NT@bidHeader}{\ntlowtext@\nthightext@to}{}
 
     % We can use the area past the first range for explanation...
-    \ifthenelse{\NOT \boolean{1ntv} \AND \equal{\altntlowtext}{} \AND \equal{\altnthightext}{}}{
-        \node [t, right] at (130, 111.3) (1ntstyle){\tBluereg{Style:\ }\bluereg{\altntresponse}};
-        \bguideline{138}{202}{109.8}
+    \ifthenelse{\NOT \boolean{1ntv} \AND \equal{\altntlowtext}{} \AND \equal{\altnthightext}{}}
+        {
+            \block{1ntstyle}{130,110.5}{right}{1001}{announce}
+                {Style:}{}{\altntresponse}
     }{ % unless there is a second range.
-        \node [t, right] at (149.5, 110.5) (1nt2ndrange) {\bigblue{1NT}};
-        \node [t, right] at (128, 111.3) (ntseatvul){\tBluereg{(If:}};
-        \node [t, right, xshift=-2mm] at (ntseatvul.east) {\bluereg{\ntseatvul}};
-        \bguideline{132}{148.5}{109.8}
-        \node [t, right] at (148.5, 111.3) {\bluereg{)}};
-        \node [t, right] at (160.5, 111.3) {\tBluereg{to}};
-        \node [t] at (158, 111.3) {\bluebold{\altntlowtext}};
-        \bguideline{156}{160.5}{109.8}
-        \node [t] at (165.5, 111.3) {\bluebold{\altnthightext}};
-        \bguideline{163.5}{168}{109.8}
-        \checkbox{ntasr} (ntasr) at (184.5, 111.3) {};
-        \node [t, left, xshift=0.5mm] at (ntasr.west) {\tRegtext{Same Resp?}};
-        \node [t, right, xshift=-0.5mm] at (ntasr.east) {\regtext{\altntresponse}};
-        \guideline{186}{202}{109.8}
+            \block{1ntrange1conds}{1ntrange1.east}{right}{0001}{announce}
+                {}{}{If:\,\ntseatvul}
+            \block{1nhd2}{152.5,110.5}{right}{1010}{announce}
+                {1NT@bidHeader}{\altntlowtext@\altnthightext@to}{}
+            \block{ntasr}{1nhd2.east}{right}{1101}{regular}
+                {Same resp?}{}{\altntresponse}
     }
 
 % 1NT box, left column
-    \node [t, right] at (104, 107) (nt5cm) {\tRegtext{5-Card Major\,}};
-    \checkbox{nt5cm} at (nt5cm.east) {};
-    \node [t, right] at (123, 107) (syson) {\tRegtext{Sys on vs}};
-    \node [t] at (143, 107) {\regtext{\sysontext}};
-    \guideline{136}{150}{105.5}
+    \block{nt5cm}{104,107}{right}{1100}{regular}
+        {5-Card Major}{}{}
+    \block{syson}{nt5cm.east}{right}{1001}{regular}
+        {Sys on vs:}{}{\sysontext}
 
-    \node [t, right] at (104, 103) (1nt2csty) {\tRegtext{2\,\c: Stayman\,}};
-    \checkbox{staym} at (1nt2csty.east) (staym) {};
-    \node [t, right] at (staym.east) (1nt2cpuppet) {\tRegtext{Puppet\,}};
-    \checkbox{puppe} at (1nt2cpuppet.east) (puppe) {};
-    \node [t, right] at (puppe.east) (1nt2cother) {\tRedreg{Other\,}};
-    \rcheckbox{2coth} at (1nt2cother.east) {};
+    \block{1nt2c}{104,103}{right}{1000}{regular}
+        {2\bc:}{}{}
+    \block{staym}{1nt2c.east}{right}{1100}{regular}
+        {Stayman}{}{}
+    \block{puppe}{staym.east}{right}{1100}{regular}
+        {Puppet}{}{}
+    \block{2coth}{puppe.east}{right}{1100}{alert}
+        {Other}{}{}
 
-    \node [t, right] at (104, 99) {\tRegtext{2\,\rd: Nat\,}};
-    \node [t] at (119.5, 99) (1nt2d) {\tBluereg{\,Tfr\,}};
-    \checkbox{nat2d} at (1nt2d.west) {};
-    \bcheckbox{jac2d} at (1nt2d.east) (1nt2dtxf) {};
-    \node [t, right] at (1nt2dtxf.east) (1nt2dother) {\tRedreg{Other\ }\redreg{\ntditext}};
-    \rguideline{132}{150}{97.5}
+    \block{1nt2d}{104,99}{right}{1000}{regular}
+        {2\rd:}{}{}
+    \block{2doth}{123,99}{left}{1100}{alert}
+        {Other}{}{}
+    \block{jac2d}{2doth.west}{left}{1100}{announce}
+        {Tfr}{}{}
+    \block{nat2d}{jac2d.west}{left}{1100}{regular}
+        {Nat}{}{}
+    \block{2dothtext}{2doth.east}{right}{0001}{alert}
+        {}{}{\ntditext}
 
-    \node [t, right] at (104, 95) {\tRegtext{2\,\rh: Nat\,}};
-    \node [t] at (119.5, 95) (1nt2h) {\tBluereg{\,Tfr\,}};
-    \checkbox{nat2h} at (1nt2h.west) {};
-    \bcheckbox{jac2h} at (1nt2h.east) (1nt2htxf) {};
-    \node [t, right] at (1nt2htxf.east) (1nt2hother) {\tRedreg{Other\ }\redreg{\nthetext}};
-    \rguideline{132}{150}{93.5}
+    \block{1nt2h}{104,95}{right}{1000}{regular}
+        {2\rh:}{}{}
+    \block{2hoth}{123,95}{left}{1100}{alert}
+        {Other}{}{}
+    \block{jac2h}{2hoth.west}{left}{1100}{announce}
+        {Tfr}{}{}
+    \block{nat2h}{jac2h.west}{left}{1100}{regular}
+        {Nat}{}{}
+    \block{2hothtext}{2hoth.east}{right}{0001}{alert}
+        {}{}{\nthetext}
 
-    \node [t, right] at (104, 91) {\tRegtext{2\,\bs: Nat\,}};
-    \node [t] at (119.5, 91) (1nt2s) {\tBluereg{\,Tfr\,}};
-    \checkbox{nat2s} at (1nt2s.west) {};
-    \bcheckbox{trf2s} at (1nt2s.east) (1nt2stxf) {};
-    \node [t, right] at (1nt2stxf.east) (1nt2sother) {\tRedreg{Other\ }\redreg{\ntsptext}};
-    \rguideline{132}{150}{89.5}
+    \block{1nt2s}{104,91}{right}{1000}{regular}
+        {2\bs:}{}{}
+    \block{2soth}{123,91}{left}{1100}{alert}
+        {Other}{}{}
+    \block{trf2s}{2soth.west}{left}{1100}{announce}
+        {Tfr}{}{}
+    \block{nat2s}{trf2s.west}{left}{1100}{regular}
+        {Nat}{}{}
+    \block{2sothtext}{2soth.east}{right}{0001}{alert}
+        {}{}{\ntsptext@text width=140}
 
-    \node [t, right] at (103, 87) {\tRegtext{2NT: Nat}};
-    \node [t] at (119.5, 87) (1nt2nt) {\tBluereg{\,Tfr\,}};
-    \checkbox{nat2n} at (1nt2nt.west) {};
-    \bcheckbox{trf2n} at (1nt2nt.east) (1nt2nttxf) {};
-    \node [t, right] at (1nt2nttxf.east) (1nt2ntother) {\tRedreg{Other\ }\redreg{\ntnttext}};
-    \rguideline{132}{150}{85.5}
+    \block{1nt2n}{104,87}{right}{1000}{regular}
+        {2NT:}{}{}
+    \block{2noth}{123,87}{left}{1100}{alert}
+        {Other}{}{}
+    \block{jac2n}{2noth.west}{left}{1100}{announce}
+        {Tfr}{}{}
+    \block{nat2n}{jac2n.west}{left}{1100}{regular}
+        {Nat}{}{}
+    \block{2nothtext}{2noth.east}{right}{0001}{alert}
+        {}{}{\ntnttext@text width=140}
 
-    \node [t, right] at (104, 83) {\tRedreg{Smolen}};
-    \node [t] at (121.5, 83) (1nttxf4c) {\tBluereg{\,Tfr 4\,\bc\,}};
-    \rcheckbox{smole} at (1nttxf4c.west) {};
-    \bcheckbox{tex4c} at (1nttxf4c.east) (tex4cbox) {};
-    \node [t, right] at (tex4cbox.east) (1nttxf4d){\tBluereg{4\,\rd\,}};
-    \bcheckbox{tex4d} at (1nttxf4d.east) (tex4dbox) {};
-    \node [t, right] at (tex4dbox.east) (1nttxf4h) {\tBluereg{4\,\rh\,}};
-    \bcheckbox{tex4h} at (1nttxf4h.east) {};
+    \block{smole}{104,83}{right}{1100}{alert}
+        {Smolen}{}{}
+    \block{trf}{smole.east}{right}{1000}{announce}
+        {Trf:}{}{}
+    \block{tex4c}{trf.east}{right}{1100}{announce}
+        {4\,\bc@regularTextField}{}{}
+    \block{tex4d}{tex4c.east}{right}{1100}{announce}
+        {4\,\rd@regularTextField}{}{}
+    \block{tex4h}{tex4d.east}{right}{1100}{announce}
+        {4\,\rh@regularTextField}{}{}
 
-    \node [t, right] at (104, 79) (ntnegx) {\tRegtext{Dbl: Neg\,}};
-    \checkbox{ntneg} at (ntnegx.east) (ntnegbox) {};
-    \node [t, right] at (ntnegbox.east) {\regtext{\ntnegtext}};
-    \guideline{119.5}{134}{77.5}
-    \node [t, right] at (134, 79) (ntpenx) {\tRegtext{Pen\,}};
-    \checkbox{ntpen} at (ntpenx.east) {};
-    \node [t, right] at (145, 79) (ntotherx) {\tRedreg{Other:\ }\redreg{\ntxothertext}};
-    \rguideline{153.5}{170}{77.5}
-    \node [t, right] at (170, 79) (ntleb) {\tRedreg{Lebensohl\ }};
-    \rcheckbox{leben} at (ntleb.east) (ntlebbox){};
-    \node [t, right] at (ntlebbox.east) {\redreg{\ntlebentext}};
-    \rguideline{187}{202}{77.5}
+    \block{ntdbl}{104,79}{right}{1000}{regular}
+        {Dbl:}{}{}
+    \block{ntneg}{ntdbl.east}{right}{1101}{regular}
+        {Neg}{}{\ntnegtext}
+    \block{ntpen}{ntneg.east}{right}{1100}{regular}
+        {Pen}{}{}
+    \block{ntotherx}{ntpen.east}{right}{1001}{alert}
+        {Other:}{}{\ntxothertext}
+    \block{ntneg}{170,79}{right}{1101}{alert}
+        {Lebensohl}{}{\ntlebentext}
 
 %1NT box, right column
-    \node [t, right] (1nt3c) at (150, 106) {\tRegtext{3\,\bc\ }\regtext{\ntcjumptext}};
-    \guideline{155}{202}{104.5}
-    \node [t, right] (1nt3d) at (150, 102) {\tRegtext{3\,\rd\ }\regtext{\ntdjumptext}};
-    \guideline{155}{202}{100.5}
-    \node [t, right] (1nt3h) at (150, 98) {\tRegtext{3\,\rh\ }\regtext{\nthjumptext}};
-    \guideline{155}{202}{96.5}
-    \node [t, right] (1nt3s) at (150, 94) {\tRegtext{3\,\bs\ }\regtext{\ntsjumptext}};
-    \guideline{155}{202}{92.5}
-    \node [t, right] (1ntother) at (150, 90) {\tRedreg{Other:\ }\redreg{\ntothertexttop}};
-    \rguideline{159}{202}{88.5}
-    \node [t, right] at (150, 86) {\redreg{\ntothertextbottom}};
-    \rguideline{151}{202}{84.5}
+
+    \block{1nt3c}{152.5,106}{right}{1001}{alert}
+        {3\,\bc@regularTextField}{}{\ntcjumptext}
+    \block{1nt3d}{152.5,102}{right}{1001}{alert}
+        {3\,\rd@regularTextField}{}{\ntdjumptext}
+    \block{1nt3h}{152.5,98}{right}{1001}{alert}
+        {3\,\rh@regularTextField}{}{\nthjumptext}
+    \block{1nt3s}{152.5,94}{right}{1001}{alert}
+        {3\,\bs@regularTextField}{}{\ntsjumptext}
+    \block{1ntother}{152.5,90}{right}{1000}{alert}
+        {Other:}{}{}
+    \block{1ntothertop}{1ntother.east}{right}{0001}{alert}
+        {}{}{\ntothertexttop}
+    \block{1ntotherbottom}{152.5,86}{right}{0001}{alert}
+        {}{}{\ntothertextbottom}
 
 %2NT/3NT Openings
     \node [t, right] at (104, 72.5) {\bigtext{2NT}};
