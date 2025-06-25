@@ -93,12 +93,6 @@
 \colorlet{alertLabel}{red}
 \colorlet{announceLabel}{blue}
 \colorlet{regularLabel}{black}
-\colorlet{alertNoGuide}{red}
-\colorlet{announceNoGuide}{blue}
-\colorlet{regularNoGuide}{black}
-\colorlet{alertNoGuideLabel}{red}
-\colorlet{announceNoGuideLabel}{blue}
-\colorlet{regularNoGuideLabel}{black}
 
 %define boolean to use in functions
 \newboolean{guide} %Label, NoGuide will turn it off
@@ -108,7 +102,6 @@
 \newcommand\position{}
 \newcommand\direction{}
 \newcommand\rosewind{}
-\newcommand\category{}
 \newcommand\content{}
 \newcommand\textlsnum{}
 \newcommand\labelIndex{3}
@@ -221,13 +214,14 @@
     % All *Style parameters are comma-separated lists
 
     \setboolean{guide}{true}
+    \StrSubstitute{#4}{NoGuide}{}[\category]
     \IfSubStringInString{Label}{#4}
         {\setboolean{guide}{false}}
         {}
     \IfSubStringInString{NoGuide}{#4}
         {\setboolean{guide}{false}}
         {}
-    \tikzset{#1/.style = {t, #3, textField=#4}}
+    \tikzset{#1/.style = {t, #3, textField=\category}}
     \setsepchar{,}
     \readlist*\styles{#6,}
     \foreachitem\style\in\styles{
@@ -260,7 +254,7 @@
             \gettikzxy{(mid-base-se)}{\xse}{\ysw}
             \pgfmathqparse{\xse - \xsw}
             \ifdim \pgfmathresult pt > 50pt
-                \draw[#4, thin] (mid-base-sw) -- (mid-base-se);
+                \draw[\category, thin] (mid-base-sw) -- (mid-base-se);
             \fi
         }
         {}
