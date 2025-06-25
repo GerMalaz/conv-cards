@@ -93,15 +93,15 @@
 \colorlet{alertLabel}{red}
 \colorlet{announceLabel}{blue}
 \colorlet{regularLabel}{black}
-\colorlet{alertNoGuideline}{red}
-\colorlet{announceNoGuideline}{blue}
-\colorlet{regularNoGuideline}{black}
-\colorlet{alertNoGuidelineLabel}{red}
-\colorlet{announceNoGuidelineLabel}{blue}
-\colorlet{regularNoGuidelineLabel}{black}
+\colorlet{alertNoGuide}{red}
+\colorlet{announceNoGuide}{blue}
+\colorlet{regularNoGuide}{black}
+\colorlet{alertNoGuideLabel}{red}
+\colorlet{announceNoGuideLabel}{blue}
+\colorlet{regularNoGuideLabel}{black}
 
 %define boolean to use in functions
-\newboolean{guide} %Label, NoGuideline will turn it off
+\newboolean{guide} %Label, NoGuide will turn it off
 
 %define commands to use/redefine in functions
 \newcommand\name{}
@@ -224,7 +224,7 @@
     \IfSubStringInString{Label}{#4}
         {\setboolean{guide}{false}}
         {}
-    \IfSubStringInString{NoGuideline}{#4}
+    \IfSubStringInString{NoGuide}{#4}
         {\setboolean{guide}{false}}
         {}
     \tikzset{#1/.style = {t, #3, textField=#4}}
@@ -357,7 +357,7 @@
                                     {\rangeContentLow}{\rangeContentStyle}
                                     [\rangeLetterspace]
                             \renewcommand\position{#1_range_lo.\rosewind}
-                            \textField{#1_range_connector}{\position}{#3}{#5NoGuideline}
+                            \textField{#1_range_connector}{\position}{#3}{#5NoGuide}
                                     {\rangeConnector}{\rangeConnectorStyle}
                                     [\rangeLetterspace]
                             \renewcommand\position{#1_range_connector.\rosewind}
@@ -394,7 +394,7 @@
                                     {\rangeContentHigh}{\rangeContentStyle}
                                     [\rangeLetterspace]
                             \renewcommand\position{#1_range_hi.\rosewind}
-                            \textField{#1_range_connector}{\position}{#3}{#5NoGuideline}
+                            \textField{#1_range_connector}{\position}{#3}{#5NoGuide}
                                     {\rangeConnector}{\rangeConnectorStyle}
                                     [\rangeLetterspace]
                             \renewcommand\position{#1_range_connector.\rosewind}
@@ -574,11 +574,11 @@
     }
 
 % Names:
-    \block{names}{101,212}{right}{1001}{regularNoGuideline}
+    \block{names}{101,212}{right}{1001}{regularNoGuide}
          {Names:@big,bold}
          {}
          {\names @big,bold}
-    \block{playernumber}{203, 212}{left}{0001}{regularNoGuideline}
+    \block{playernumber}{203, 212}{left}{0001}{regularNoGuide}
          {}{}
          {\playernumber @big,bold}
 
@@ -638,7 +638,7 @@
     \block{btmrp1}{203, 193}{left}{0001}{regular}
         {}{}
         {\bidspreptop @text width=465, bold}
-    \block{btmrp2}{203, 189}{left}{0001}{regularNoGuideline}
+    \block{btmrp2}{203, 189}{left}{0001}{regularNoGuide}
         {}{}
         {\bidsprepbottom @text width=465, bold}
 
