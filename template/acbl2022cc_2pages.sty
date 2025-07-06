@@ -972,39 +972,30 @@
         {}{}{\ntothertextbottom}
 
 %2NT/3NT Openings
-    \node [t, right] at (104, 72.5) {\bigtext{2NT}};
-    \node [t, right] at (121, 73.3) {\tRegtext{to}};
-    \node [t] at (118, 73.3) {\boldtext{\twonlowtext}};
-    \guideline{115.5}{121}{71.8}
-    \node [t] at (128, 73.3) {\boldtext{\twonhightext}};
-    \guideline{125}{131}{71.8}
-    \node [t, right] at (130, 73.3) (pup2n) {\tRegtext{Puppet\,}};
-    \checkbox{pup2n} at (pup2n.east) (pup2nbox) {};
-    \node [t, right] at (pup2nbox.east) (2n3s) {\tRedreg{3\,\bs:\ }\redreg{\twonsptext}};
-    \rguideline{148}{202}{71.8}
-    \node [t, right] at (104, 68.5) (con2n) {\tRedreg{Conv\,}};
-    \rcheckbox{con2n} at (con2n.east) (con2nbox) {};
-    \node [t, right] at (con2nbox.east) {\redreg{\convnttext}};
-    \rguideline{115}{130}{67}
-    \node [t, right] at (130, 68.3) (jac2n) {\tBluereg{Tfr: 3 Lvl\,}};
-    \bcheckbox{jac2n} at (jac2n.east) (jac2nbox) {};
-    \node [t, right] at (jac2nbox.east) (tex2n) {\tBluereg{4 Lvl\,}};
-    \bcheckbox{tex2n} at (tex2n.east) (tex2nbox) {};
-    \node [t, right] at (tex2nbox.east) (neg2n) {\tRegtext{Neg Dbl\,}};
-    \checkbox{neg2n} at (neg2n.east) (neg2nbox) {};
-    \node [t, right] at (neg2nbox.east) {\tRedreg{Other: }\redreg{\twonothertext}};
-    \rguideline{176}{202}{67}
+    \block{2ntrange}{104,72.5}{right}{1010}{regular}
+        {2NT@bidHeader}{\twonlowtext@\twonhightext@to}{}
+    \block{pup2n}{2ntrange.east}{right}{1100}{regular}
+        {Puppet\,}{}{}
+    \block{2n3s}{pup2n.east}{right}{1001}{alert}
+        {3\,\bs:}{}{\twonsptext}
+    \block{con2n}{104,68.5}{right}{1101}{alert}
+        {Conv\,}{}{\convnttext}
 
-    \node [t, right] at (104, 62) {\bigtext{3NT}};
-    \node [t, right] at (121, 62.8) {\tRegtext{to}};
-    \node [t] at (118, 62.8) {\boldtext{\threenlowtext}};
-    \guideline{115.5}{121}{61.3}
-    \node [t] at (128, 62.8) {\boldtext{\threenhightext}};
-    \guideline{125}{131}{61.3}
-    \rcheckbox{gam3n} at (144.5, 62.8) (gam3nbox) {};
-    \node [t, left] at (gam3nbox.west) {\tRedreg{One Suit:}};
-    \node [t, right] at (gam3nbox.east) {\redreg{\threenonesuittext}};
-    \rguideline{146.5}{202}{61.3}
+    \block{2ntrf}{130,68.5}{right}{1000}{announce}
+        {Trf:}{}{}
+    \block{jac2n}{2ntrf.east}{right}{1100}{announce}
+        {3 Lvl}{}{}
+    \block{tex2n}{jac2n.east}{right}{1100}{announce}
+        {4 Lvl}{}{}
+    \block{neg2n}{tex2n.east}{right}{1100}{announce}
+        {Neg Dbl}{}{}
+    \block{2nother}{neg2n.east}{right}{1001}{alert}
+        {Other:}{}{\twonothertext}
+
+    \block{3ntrange}{104,62}{right}{1010}{regular}
+        {3NT@bidHeader}{\threenlowtext@\threenhightext@to}{}
+    \block{gam3n}{3ntrange.east}{right}{1101}{alert}
+        {One suit:}{}{\threenonesuittext}
 
 %2C Opening
     \node [t, right] at (104, 56) {\bigtext{2\c}};
