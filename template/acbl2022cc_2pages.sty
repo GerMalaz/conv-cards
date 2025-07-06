@@ -998,109 +998,97 @@
         {One suit:}{}{\threenonesuittext}
 
 %2C Opening
-    \node [t, right] at (104, 56) {\bigtext{2\c}};
-    \node [t] at (115, 57.5) {\boldtext{\twoclowtext}};
-    \guideline{112.5}{118}{56}
-    \node [t, right] at (118, 57.5) {\tRegtext{to}};
-    \node [t] at (125, 57.5) {\boldtext{\twochightext}};
-    \guideline{122.5}{128}{56}
-    \node [t, right] at (129, 57.5) {\regtext{\twocldescribe}};
-    \guideline{130}{167}{56}
-    \node [t, right] at (104, 50) (artvs2c) {\tRegtext{Very Str\,}};
-    \checkbox{vs2cl} at (artvs2c.east) (vs2clbox) {};
-    \node [t, right, xshift=-0.5mm] at (vs2clbox.east) (artst2c) {\tRedreg{Str\,}};
-    \rcheckbox{st2cl} at (artst2c.east) (st2clbox) {};
-    \node [t, right, xshift=-0.5mm] at (st2clbox.east) (nat2c) {\tRedreg{Nat\,}};
-    \rcheckbox{na2cl} at (nat2c.east) (na2clbox) {};
-    \node [t, right, xshift=-0.5mm] at (na2clbox.east) (conv2c) {\tRedreg{Conv\,}};
-    \rcheckbox{ot2cl} at (conv2c.east) (ot2clbox) {};
-    \node [t, right] at (ot2clbox.east) {\redreg{\twoclconvtext}};
-    \rguideline{142.5}{160}{48.5}
+    \block{2crange}{104,56}{right}{1010}{regular}
+        {2\bc@bidHeader}{\twoclowtext@\twochightext@to}{}
+    \block{2cdesc}{2crange.east}{right}{0001}{regular}
+        {}{}{\twocldescribe}
 
-    \node [t, right] at (168, 57.5) (neg2d) {\tRegtext{2\,\rd\ Resp: Neg\,}};
-    \checkbox{neg2d} at (neg2d.east) (neg2dbox) {};
-    \node [t, right] at (neg2dbox.east) (wai2d) {\tRegtext{Waiting\,}};
-    \checkbox{wai2d} at (wai2d.east) {};
-    \rcheckbox{steps} at (168, 54) (2cstepsbox) {};
-    \node [t, left] at (2cstepsbox.west) {\tRedreg{Steps}};
-    \node [t, right] at (2cstepsbox.east) {\redreg{\twoclstepstext}};
-    \rguideline{170}{188}{52.5}
-    \node [t, right] at (187.5, 54) (neg2h) {\tRedreg{2\,\rh\ Neg\,}};
-    \rcheckbox{neg2h} at (neg2h.east) {};
-    \node [t, right] at (160, 50) {\tRedreg{Other: }\redreg{\twoclresponse}};
-    \rguideline{169}{202}{48.5}
+    \block{wai2d}{201,57.5}{left}{1100}{regular}
+        {Waiting}{}{}
+    \block{neg2d}{wai2d.west}{left}{1100}{regular}
+        {Neg}{}{}
+    \block{2c2d}{neg2d.west}{left}{1000}{regular}
+        {2\,\rd\ Resp:}{}{}
+
+    \block{neg2h}{201,54}{left}{1100}{alert}
+        {2\,\rh\ Neg}{}{}
+    \block{steps}{neg2h.west}{left}{1101}{alert}
+        {Steps}{}{\twoclstepstext}
+
+    \block{vs2cl}{104,50}{right}{1100}{regular}
+        {Very Str}{}{}
+    \block{st2cl}{vs2cl.east}{right}{1100}{alert}
+        {Str}{}{}
+    \block{na2cl}{st2cl.east}{right}{1100}{alert}
+        {Nat}{}{}
+    \block{ot2cl}{na2cl.east}{right}{1101}{alert}
+        {Conv}{}{\twoclconvtext}
+
+    \block{2cother}{203,50}{left}{1001}{alert}
+        {Other:}{}{\twoclresponse}
 
 %2D Opening
-    \node [t, right] at (104, 44.5) {\bigtext{2\rd}};
-    \node [t] at (115, 45.5) {\boldtext{\twodlowtext}};
-    \guideline{112.5}{118}{44}
-    \node [t, right] at (118, 45.5) {\tRegtext{to}};
-    \node [t] at (125, 45.5) {\boldtext{\twodhightext}};
-    \guideline{122.5}{128}{44}
-    \node [t, right] at (129, 45.5) {\regtext{\twoddescribe}};
-    \guideline{130}{177}{44}
-    \node [t, right] at (104, 40.5) (wk2di) {\tRegtext{Wk\,}};
-    \checkbox{wk2di} (wk2dibox) at (wk2di.east) {};
-    \node [t, right] at (wk2dibox.east) (in2di) {\tRedreg{Int\,}};
-    \rcheckbox{in2di} (in2dibox) at (in2di.east) {};
-    \node [t, right, xshift=-0.5mm] at (in2dibox.east) (st2di) {\tRedreg{Str\,}};
-    \rcheckbox{st2di} (st2dibox) at (st2di.east) {};
-    \node [t, right] at (st2dibox.east) (co2di) {\tRedreg{Conv\,}};
-    \rcheckbox{co2di} at (co2di.east) {};
-    \node [t, right] at (137, 40.5) {\tRegtext{Rebids over 2NT: }\regtext{\twodntresp}};
-    \guideline{158}{177}{39}
-    \node [t, right] at (177, 45.5) (dnsnf) {\tRedreg{New Suit NF\,}};
-    \rcheckbox{dnsnf} at (dnsnf.east) {};
-    \node [t, right] at (177, 40.5) {\tRedreg{Other: }\redreg{\twodresponse}};
-    \rguideline{186}{202}{39}
+    \block{2drange}{104,44.5}{right}{1010}{regular}
+        {2\rd@bidHeader}{\twodlowtext@\twodhightext@to}{}
+    \block{2ddesc}{2drange.east}{right}{0001}{regular}
+        {}{}{\twoddescribe}
+    \block{dnsnf}{201,44.5}{left}{1100}{alert}
+        {New Suit NF}{}{}
+
+    \block{wk2di}{104,40.5}{right}{1100}{regular}
+        {Wk}{}{}
+    \block{in2di}{wk2di.east}{right}{1100}{alert}
+        {Int}{}{}
+    \block{st2di}{in2di.east}{right}{1100}{alert}
+        {Str}{}{}
+    \block{co2di}{st2di.east}{right}{1100}{alert}
+        {Conv}{}{}
+    \block{2diresp}{co2di.east}{right}{1001}{regular}
+        {Rebids over 2NT:}{}{\twodntresp}
+    \block{dnsnf}{203,40.5}{left}{1001}{alert}
+        {Other:}{}{\twodresponse}
 
 %2H Opening
-    \node [t, right] at (104, 34.5) {\bigtext{2\rh}};
-    \node [t] at (115, 35.5) {\boldtext{\twohlowtext}};
-    \guideline{112.5}{118}{34}
-    \node [t, right] at (118, 35.5) {\tRegtext{to}};
-    \node [t] at (125, 35.5) {\boldtext{\twohhightext}};
-    \guideline{122.5}{128}{34}
-    \node [t, right] at (129, 35.5) {\regtext{\twohdescribe}};
-    \guideline{130}{177}{34}
-    \node [t, right] at (104, 30.5) (wk2he) {\tRegtext{Wk\,}};
-    \checkbox{wk2he} (wk2hebox) at (wk2he.east) {};
-    \node [t, right, xshift=-0.5mm] at (wk2hebox.east) (in2he) {\tRedreg{Int\,}};
-    \rcheckbox{in2he} (in2hebox) at (in2he.east) {};
-    \node [t, right, xshift=-0.5mm] at (in2hebox.east) (st2he) {\tRedreg{Str\,}};
-    \rcheckbox{st2he} (st2hebox) at (st2he.east) {};
-    \node [t, right, xshift=-0.5mm] at (st2hebox.east) (2s2he) {\tRedreg{2-Suits\,}};
-    \rcheckbox{2s2he} at (2s2he.east) {};
-    \node [t, right] at (137, 30.5) {\tRegtext{Rebids over 2NT: }\regtext{\twohntresp}};
-    \guideline{158}{177}{29}
-    \node [t, right] at (177, 35.5) (hnsnf) {\tRedreg{New Suit NF\,}};
-    \rcheckbox{hnsnf} at (hnsnf.east) {};
-    \node [t, right] at (177, 30.5) {\tRedreg{Other: }\redreg{\twohresponse}};
-    \rguideline{186}{202}{29}
+    \block{2hrange}{104,34.5}{right}{1010}{regular}
+        {2\rh@bidHeader}{\twohlowtext@\twohhightext@to}{}
+    \block{2hdesc}{2hrange.east}{right}{0001}{regular}
+        {}{}{\twohdescribe}
+    \block{hnsnf}{201,34.5}{left}{1100}{alert}
+        {New Suit NF}{}{}
+
+    \block{wk2he}{104,30.5}{right}{1100}{regular}
+        {Wk}{}{}
+    \block{in2he}{wk2he.east}{right}{1100}{alert}
+        {Int}{}{}
+    \block{st2he}{in2he.east}{right}{1100}{alert}
+        {Str}{}{}
+    \block{2s2he}{st2he.east}{right}{1100}{alert}
+        {2 Suits}{}{}
+    \block{2hiresp}{2s2he.east}{right}{1001}{regular}
+        {Rebids over 2NT:}{}{\twohntresp}
+    \block{hnsnf}{203,30.5}{left}{1001}{alert}
+        {Other:}{}{\twohresponse}
 
 %2S Opening
-    \node [t, right] at (104, 24.5) {\bigtext{2\s}};
-    \node [t] at (115, 25.5) {\boldtext{\twoslowtext}};
-    \guideline{112.5}{118}{24}
-    \node [t, right] at (118, 25.5) {\tRegtext{to}};
-    \node [t] at (125, 25.5) {\boldtext{\twoshightext}};
-    \guideline{122.5}{128}{24}
-    \node [t, right] at (129, 25.5) {\regtext{\twosdescribe}};
-    \guideline{130}{175}{24}
-    \node [t, right] at (104, 20.5) (wk2sp) {\tRegtext{Wk\,}};
-    \checkbox{wk2sp} (wk2spbox) at (wk2sp.east) {};
-    \node [t, right, xshift=-0.5mm] at (wk2spbox.east) (in2sp) {\tRedreg{Int\,}};
-    \rcheckbox{in2sp} (in2spbox) at (in2sp.east) {};
-    \node [t, right, xshift=-0.5mm] at (in2spbox.east) (st2sp) {\tRedreg{Str\,}};
-    \rcheckbox{st2sp} (st2spbox) at (st2sp.east) {};
-    \node [t, right, xshift=-0.5mm] at (st2spbox.east) (2s2sp) {\tRedreg{2-Suits\,}};
-    \rcheckbox{2s2sp} at (2s2sp.east) {};
-    \node [t, right] at (137, 20.5) {\tRegtext{Rebids over 2NT: }\regtext{\twosntresp}};
-    \guideline{158}{178}{19}
-    \node [t, right] at (177, 25.5) (snsnf) {\tRedreg{New Suit NF\,}};
-    \rcheckbox{snsnf} at (snsnf.east) {};
-    \node [t, right] at (177, 20.5) {\tRedreg{Other: }\redreg{\twosresponse}};
-    \rguideline{186}{202}{19}
+    \block{2srange}{104,24.5}{right}{1010}{regular}
+        {2\bs@bidHeader}{\twoslowtext@\twoshightext@to}{}
+    \block{2sdesc}{2srange.east}{right}{0001}{regular}
+        {}{}{\twosdescribe}
+    \block{snsnf}{201,24.5}{left}{1100}{alert}
+        {New Suit NF}{}{}
+
+    \block{wk2sp}{104,20.5}{right}{1100}{regular}
+        {Wk}{}{}
+    \block{in2sp}{wk2sp.east}{right}{1100}{alert}
+        {Int}{}{}
+    \block{st2sp}{in2sp.east}{right}{1100}{alert}
+        {Str}{}{}
+    \block{2s2sp}{st2sp.east}{right}{1100}{alert}
+        {2 Suits}{}{}
+    \block{2siresp}{2s2sp.east}{right}{1001}{regular}
+        {Rebids over 2NT:}{}{\twosntresp}
+    \block{hnsnf}{203,20.5}{left}{1001}{alert}
+        {Other:}{}{\twosresponse}
 
 %Bottom of card
     \node [t, right] at (104, 15) (jshiftresp) {\tRegtext{Jump Shift Resp:\ }\regtext{\jshifttext}};
